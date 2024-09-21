@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Core.Entities;
 
@@ -12,7 +13,9 @@ public partial class Vehicle
 
     public int VehicleTypeId { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Stay> Stay { get; set; } = [];
 
+    [JsonIgnore]
     public virtual VehicleType VehicleType { get; set; } = null!;
 }

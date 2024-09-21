@@ -18,38 +18,26 @@ namespace Infrastructure.Repositories
         }
 
         async Task<List<TEntity>> IViewsRepository<TEntity>.GetAllAsync(Expression<Func<TEntity, bool>>? filter,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string includeProperties)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy)
         {
             IQueryable<TEntity> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
-            }
-
-            foreach (string includeProperty in includeProperties.Split
-                (Separator, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
             }
 
             return await (orderBy != null ? orderBy(query).ToListAsync() : query.ToListAsync());
         }
 
         async Task<TEntity?> IViewsRepository<TEntity>.GetAsync(Expression<Func<TEntity, bool>>? filter,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string includeProperties)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy)
         {
             IQueryable<TEntity> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
-            }
-
-            foreach (string includeProperty in includeProperties.Split
-                (Separator, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
             }
 
             return await (orderBy != null ? orderBy(query).FirstOrDefaultAsync() : query.FirstOrDefaultAsync());

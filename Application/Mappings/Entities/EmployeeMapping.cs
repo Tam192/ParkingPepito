@@ -1,8 +1,8 @@
-﻿using Application.Dtos;
+﻿using Application.Dtos.Entities;
 using AutoMapper;
 using Core.Entities;
 
-namespace Application.Mappings
+namespace Application.Mappings.Entities
 {
     public class EmployeeMapping : Profile
     {

@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories
         }
 
         async Task<List<TEntity>> IEntitiesRepository<TEntity>.GetAllAsync(Expression<Func<TEntity, bool>>? filter,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string includeProperties)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string? includeProperties)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -28,17 +28,20 @@ namespace Infrastructure.Repositories
                 query = query.Where(filter);
             }
 
-            foreach (string includeProperty in includeProperties.Split
-                (Separator, StringSplitOptions.RemoveEmptyEntries))
+            if (!string.IsNullOrWhiteSpace(includeProperties))
             {
-                query = query.Include(includeProperty);
+                foreach (string includeProperty in includeProperties.Split
+                (Separator, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
             }
 
             return await (orderBy != null ? orderBy(query).ToListAsync() : query.ToListAsync());
         }
 
         async Task<TEntity?> IEntitiesRepository<TEntity>.GetAsync(Expression<Func<TEntity, bool>>? filter,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string includeProperties)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string? includeProperties)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -47,10 +50,13 @@ namespace Infrastructure.Repositories
                 query = query.Where(filter);
             }
 
-            foreach (string includeProperty in includeProperties.Split
-                (Separator, StringSplitOptions.RemoveEmptyEntries))
+            if (!string.IsNullOrWhiteSpace(includeProperties))
             {
-                query = query.Include(includeProperty);
+                foreach (string includeProperty in includeProperties.Split
+                (Separator, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
             }
 
             return await (orderBy != null ? orderBy(query).FirstOrDefaultAsync() : query.FirstOrDefaultAsync());

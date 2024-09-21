@@ -1,8 +1,8 @@
-﻿using Application.Dtos;
+﻿using Application.Dtos.Views;
 using AutoMapper;
 using Core.Views;
 
-namespace Application.Mappings
+namespace Application.Mappings.Views
 {
     public class ResidentDebtsMapping : Profile
     {

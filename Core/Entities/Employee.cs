@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Core.Entities;
 
@@ -13,7 +14,9 @@ public partial class Employee
 
     public decimal? PhoneNumber { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Stay> StayDeleteEmployee { get; set; } = [];
 
+    [JsonIgnore]
     public virtual ICollection<Stay> StayEmployee { get; set; } = [];
 }

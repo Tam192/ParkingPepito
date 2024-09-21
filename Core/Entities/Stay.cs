@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Core.Entities;
 
@@ -19,9 +20,12 @@ public partial class Stay
 
     public DateTime? DeleteDate { get; set; }
 
+    [JsonIgnore]
     public virtual Employee? DeleteEmployee { get; set; }
 
+    [JsonIgnore]
     public virtual Employee Employee { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual Vehicle Vehicle { get; set; } = null!;
 }
