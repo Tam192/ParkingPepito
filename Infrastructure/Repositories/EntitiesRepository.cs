@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.Interfaces.DbContext;
+using Core.Interfaces.Repository;
 using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
-    public class EntitiesRepository<TEntity> : IEntitiesRepository<TEntity> where TEntity : class, IDisposable
+    public class EntitiesRepository<TEntity> : IEntitiesRepository<TEntity> where TEntity : class, IEntity
     {
         internal ParkingPepitoDbContext _context;
         internal DbSet<TEntity> dbSet;

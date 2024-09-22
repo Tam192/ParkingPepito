@@ -1,11 +1,12 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.Interfaces.DbContext;
+using Core.Interfaces.Repository;
 using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
-    public class ViewsRepository<TEntity> : IViewsRepository<TEntity> where TEntity : class, IDisposable
+    public class ViewsRepository<TEntity> : IViewsRepository<TEntity> where TEntity : class, IView
     {
         internal ParkingPepitoDbContext _context;
         internal DbSet<TEntity> dbSet;

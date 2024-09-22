@@ -1,10 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using Core.Interfaces.DbContext;
+using System.Linq.Expressions;
 
 namespace Core.Interfaces.Repository
 {
-    public interface IViewsRepository<TEntity> where TEntity : class
+    public interface IViewsRepository<TView> where TView : class, IView
     {
-        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null);
-        Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>>? filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy);
+        Task<List<TView>> GetAllAsync(Expression<Func<TView, bool>>? filter = null, Func<IQueryable<TView>, IOrderedQueryable<TView>>? orderBy = null);
+        Task<TView?> GetAsync(Expression<Func<TView, bool>>? filter, Func<IQueryable<TView>, IOrderedQueryable<TView>>? orderBy);
     }
 }

@@ -6,17 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance;
 
-public partial class ParkingPepitoDbContext : DbContext, IParkingPepitoDbContext
+public partial class ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbContext> options) : DbContext(options), IParkingPepitoDbContext
 {
-    public ParkingPepitoDbContext()
-    {
-    }
-
-    public ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbContext> options)
-        : base(options)
-    {
-    }
-
     public virtual DbSet<CostType> CostType { get; set; }
 
     public virtual DbSet<Employee> Employee { get; set; }

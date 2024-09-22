@@ -8,8 +8,8 @@ namespace Application.Mappings.UseCases
     {
         public EntryRegisterUseCaseMapping()
         {
-            _ = CreateMap<EntryRegisterUseCase, Vehicle>().ReverseMap();
-            _ = CreateMap<EntryRegisterUseCase, Stay>().ReverseMap();
+            _ = CreateMap<RegisterEntryUseCase, Vehicle>().ReverseMap();
+            _ = CreateMap<RegisterEntryUseCase, Stay>().ReverseMap();
             _ = CreateMap<Vehicle, Stay>().ReverseMap();
         }
     }

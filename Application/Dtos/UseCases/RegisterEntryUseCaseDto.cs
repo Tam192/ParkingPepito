@@ -1,4 +1,6 @@
-﻿namespace Application.Dtos.UseCases
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Application.Dtos.UseCases
 {
     public class RegisterEntryUseCaseDto
     {

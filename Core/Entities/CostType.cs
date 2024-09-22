@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Interfaces.DbContext;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities;
 
-public partial class CostType
+public partial class CostType : IEntity
 {
     [Key]
     public int Id { get; set; }

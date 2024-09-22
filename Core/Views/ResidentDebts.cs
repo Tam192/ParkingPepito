@@ -1,6 +1,8 @@
-﻿namespace Core.Views;
+﻿using Core.Interfaces.DbContext;
 
-public partial class ResidentDebts
+namespace Core.Views;
+
+public partial class ResidentDebts : IView
 {
     public int VehicleId { get; set; }
 

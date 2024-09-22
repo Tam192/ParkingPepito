@@ -1,10 +1,11 @@
-﻿using Domain.Entities;
+﻿using Core.Interfaces.DbContext;
+using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Core.Entities;
 
-public partial class Vehicle
+public partial class Vehicle : IEntity
 {
     [Key]
     public int Id { get; set; }

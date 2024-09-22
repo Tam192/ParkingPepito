@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Interfaces.DbContext;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Core.Entities;
 
-public partial class Stay
+public partial class Stay : IEntity
 {
     [Key]
     public int Id { get; set; }
