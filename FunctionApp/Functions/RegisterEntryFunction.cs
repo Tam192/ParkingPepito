@@ -11,7 +11,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace FunctionApp
+namespace FunctionApp.Functions
 {
     public class RegisterEntryFunction(ILogger<RegisterEntryFunction> logger, IRegisterEntryUseCase registerEntryUseCase, IValidator<RegisterEntryUseCaseDto> validator)
     {
