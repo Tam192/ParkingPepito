@@ -5,7 +5,6 @@ using Core.Entities;
 using Core.Interfaces.Repository;
 using Domain.Entities;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
 namespace Application.UseCases
 {
@@ -14,8 +13,7 @@ namespace Application.UseCases
         public Task<BaseResponse<decimal>> RegisterExitAsync(RegisterExitUseCaseDto request);
     }
 
-    public class RegisterExitUseCase(ILogger<RegisterEntryUseCase> logger, IEntitiesRepository<Vehicle> vehicleRepository, IEntitiesRepository<Stay> stayRepository,
-        IEntitiesRepository<VehicleType> vehicleTypeRepository, IMapper mapper) : IRegisterExitUseCase
+    public class RegisterExitUseCase(ILogger<RegisterEntryUseCase> logger, IEntitiesRepository<Vehicle> vehicleRepository, IEntitiesRepository<Stay> stayRepository, IMapper mapper) : IRegisterExitUseCase
     {
         private readonly ILogger _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         private readonly IEntitiesRepository<Vehicle> _vehicleRepository = vehicleRepository ?? throw new ArgumentNullException(nameof(vehicleRepository));
@@ -113,8 +111,8 @@ namespace Application.UseCases
             Stay terminedStay = stay;
             terminedStay = _mapper.Map(request, terminedStay);
 
-            await _stayRepository.UpdateAsync(terminedStay);
-            await _stayRepository.SaveAsync();
+            _ = await _stayRepository.UpdateAsync(terminedStay);
+            _ = await _stayRepository.SaveAsync();
 
             _logger.LogDebug("Stay terminates.");
 
