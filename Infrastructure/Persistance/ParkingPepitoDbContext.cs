@@ -24,17 +24,21 @@ public partial class ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbCont
     {
         modelBuilder.Entity<CostType>(entity =>
         {
+            entity.HasKey(e => e.Id);
+
             entity.HasIndex(e => e.Id, "CostType_Index_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Employee>(entity =>
         {
+            entity.HasKey(e => e.Id);
+
             entity.HasIndex(e => e.Id, "Employee_Index_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.PhoneNumber).HasColumnType("numeric(18, 0)");
@@ -55,9 +59,11 @@ public partial class ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbCont
 
         modelBuilder.Entity<Stay>(entity =>
         {
+            entity.HasKey(e => e.Id);
+
             entity.HasIndex(e => e.Id, "Index_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.DeleteDate).HasColumnType("datetime");
             entity.Property(e => e.FinalDate).HasColumnType("datetime");
             entity.Property(e => e.InitialDate).HasColumnType("datetime");
@@ -79,9 +85,11 @@ public partial class ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbCont
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
+            entity.HasKey(e => e.Id);
+
             entity.HasIndex(e => e.Id, "Index_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.PlateNumber).HasMaxLength(50);
 
             entity.HasOne(d => d.VehicleType).WithMany(p => p.Vehicle)
@@ -92,9 +100,11 @@ public partial class ParkingPepitoDbContext(DbContextOptions<ParkingPepitoDbCont
 
         modelBuilder.Entity<VehicleType>(entity =>
         {
+            entity.HasKey(e => e.Id);
+
             entity.HasIndex(e => e.Id, "Index_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Cost).HasColumnType("money");
             entity.Property(e => e.Name).HasMaxLength(50);
 

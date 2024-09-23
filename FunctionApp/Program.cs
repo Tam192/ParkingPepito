@@ -1,4 +1,5 @@
 using Application.Dtos.UseCases;
+using Application.Mappings.UseCases;
 using Application.UseCases;
 using Application.Validation.Validators;
 using Core.Interfaces.Repository;
@@ -6,7 +7,6 @@ using Domain.Interfaces.DbContext;
 using FluentValidation;
 using Infrastructure.Persistance;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations;
@@ -14,11 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using System.Configuration;
 using System.Reflection;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using System.Runtime.CompilerServices;
 
 IHost host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
@@ -46,8 +44,8 @@ IHost host = new HostBuilder()
 
         _ = services.AddDbContext<IParkingPepitoDbContext, ParkingPepitoDbContext>(options =>
             {
-            options.UseSqlServer(Environment.GetEnvironmentVariable("SQLConnectionString"));
-            }
+                options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings:SQLConnectionString"));
+            }, ServiceLifetime.Transient
         );
 
         //Logger
@@ -66,14 +64,17 @@ IHost host = new HostBuilder()
             }
         });
 
-        //UseCases
-        _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
+        //DbContext
+        services.AddScoped<IParkingPepitoDbContext, ParkingPepitoDbContext>();
 
         //Repository
         _ = services.AddScoped(typeof(IEntitiesRepository<>), typeof(EntitiesRepository<>));
 
+        //UseCases
+        _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
+
         //Automapper
-        _ = services.AddAutoMapper(Assembly.GetEntryAssembly());
+        _ = services.AddAutoMapper(typeof(EntryRegisterUseCaseMapping));
 
         //FluentValidator
         services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseDtoValidator>();

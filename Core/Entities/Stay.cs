@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces.DbContext;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Core.Entities;
@@ -7,6 +8,7 @@ namespace Core.Entities;
 public partial class Stay : IEntity
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public int EmployeeId { get; set; }

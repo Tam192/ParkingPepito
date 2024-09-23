@@ -9,6 +9,7 @@ namespace Application.Mappings.Entities
         public StayMapping()
         {
             _ = CreateMap<Stay, StayDto>().ReverseMap();
+            //_ = CreateMap<Stay, RegisterEntryUseCaseDto>().ReverseMap();
         }
     }
 }

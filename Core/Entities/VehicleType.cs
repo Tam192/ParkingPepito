@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces.DbContext;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Domain.Entities;
@@ -8,6 +9,7 @@ namespace Domain.Entities;
 public partial class VehicleType : IEntity
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;

@@ -2,7 +2,6 @@
 using Application.Dtos.Entities;
 using Application.Dtos.UseCases;
 using Application.UseCases;
-using Domain.Interfaces.DbContext;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;

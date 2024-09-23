@@ -60,7 +60,7 @@ namespace Infrastructure.Repositories
                 }
             }
 
-            return await (orderBy != null ? orderBy(query).FirstOrDefaultAsync() : query.FirstOrDefaultAsync());
+            return await (orderBy != null ? orderBy(query).AsNoTracking().FirstOrDefaultAsync() : query.AsNoTracking().FirstOrDefaultAsync());
         }
 
         async Task<EntityEntry<TEntity>> IEntitiesRepository<TEntity>.CreateAsync(TEntity entity)
