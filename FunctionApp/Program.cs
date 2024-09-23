@@ -15,8 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+
 
 IHost host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
@@ -45,7 +44,7 @@ IHost host = new HostBuilder()
         _ = services.AddDbContext<IParkingPepitoDbContext, ParkingPepitoDbContext>(options =>
             {
                 options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings:SQLConnectionString"));
-            }, ServiceLifetime.Transient
+            }, ServiceLifetime.Scoped
         );
 
         //Logger
@@ -72,12 +71,15 @@ IHost host = new HostBuilder()
 
         //UseCases
         _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
+        _ = services.AddScoped<IRegisterExitUseCase, RegisterExitUseCase>();
 
         //Automapper
-        _ = services.AddAutoMapper(typeof(EntryRegisterUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(RegisterEntryUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(RegisterExitUseCaseMapping));
 
         //FluentValidator
         services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseDtoValidator>();
+        services.AddScoped<IValidator<RegisterExitUseCaseDto>, RegisterExitUseCaseValidator>();
     })
     .ConfigureLogging(logging =>
     {

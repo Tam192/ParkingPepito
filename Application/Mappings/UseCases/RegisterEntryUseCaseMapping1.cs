@@ -4,9 +4,9 @@ using Core.Entities;
 
 namespace Application.Mappings.UseCases
 {
-    public class EntryRegisterUseCaseMapping : Profile
+    public class RegisterEntryUseCaseMapping : Profile
     {
-        public EntryRegisterUseCaseMapping()
+        public RegisterEntryUseCaseMapping()
         {
             _ = CreateMap<RegisterEntryUseCaseDto, Vehicle>().ReverseMap();
             _ = CreateMap<RegisterEntryUseCaseDto, Stay>().ReverseMap();

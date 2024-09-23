@@ -12,6 +12,7 @@ namespace Application.UseCases
     {
         public Task<BaseResponse<StayDto>> RegisterEntryAsync(RegisterEntryUseCaseDto request);
     }
+
     public class RegisterEntryUseCase(ILogger<RegisterEntryUseCase> logger, IEntitiesRepository<Vehicle> vehicleRepository, IEntitiesRepository<Stay> stayRepository, IMapper mapper) : IRegisterEntryUseCase
     {
         private readonly ILogger _logger = logger ?? throw new ArgumentNullException(nameof(logger));

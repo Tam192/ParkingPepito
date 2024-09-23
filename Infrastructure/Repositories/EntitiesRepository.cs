@@ -75,7 +75,7 @@ namespace Infrastructure.Repositories
         async Task<EntityEntry<TEntity>> IEntitiesRepository<TEntity>.UpdateAsync(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            return await Task.FromResult(dbSet.Attach(entity));
+            return await Task.FromResult(_context.Update(entity));
         }
 
         async Task<int> IEntitiesRepository<TEntity>.SaveAsync()
