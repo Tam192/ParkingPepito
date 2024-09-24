@@ -1,6 +1,6 @@
-﻿using Application.Dtos;
-using Application.Dtos.Entities;
+﻿using Application.Dtos.Entities;
 using Application.Dtos.UseCases;
+using Application.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repository;
@@ -8,18 +8,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases
 {
-    public interface IRegisterOfficialVehicleUseCase
+    public interface IRegisterResidentVehicleUseCase
     {
-        public Task<BaseResponse<VehicleDto>> RegisterOfficialVehicleAsync(RegisterOfficialVehicleDto request);
+        public Task<BaseResponse<VehicleDto>> RegisterResidentVehicleAsync(RegisterResidentVehicleDto request);
     }
 
-    public class RegisterOfficialVehicleUseCase(ILogger<RegisterEntryUseCase> logger, IEntitiesRepository<Vehicle> vehicleRepository, IMapper mapper) : IRegisterOfficialVehicleUseCase
+    public class RegisterResidentVehicleUseCase(ILogger<RegisterEntryUseCase> logger, IEntitiesRepository<Vehicle> vehicleRepository, IMapper mapper) : IRegisterResidentVehicleUseCase
     {
         private readonly ILogger _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         private readonly IEntitiesRepository<Vehicle> _vehicleRepository = vehicleRepository ?? throw new ArgumentNullException(nameof(vehicleRepository));
         private readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
-        public async Task<BaseResponse<VehicleDto>> RegisterOfficialVehicleAsync(RegisterOfficialVehicleDto request)
+        public async Task<BaseResponse<VehicleDto>> RegisterResidentVehicleAsync(RegisterResidentVehicleDto request)
         {
             BaseResponse<VehicleDto> resp = new();
 
@@ -40,9 +40,9 @@ namespace Application.UseCases
                 }
                 else
                 {
-                    //3. Si tenemos el vehiculo registrado, procedemos a cambiarle el tipo a oficial.
+                    //3. Si tenemos el vehiculo registrado, procedemos a cambiarle el tipo a residente.
                     _logger.LogDebug("Entered plate number is already registered. Updating the vehicle type...");
-                    vehicle.VehicleTypeId = 1;
+                    vehicle.VehicleTypeId = 2;
 
                     _ = await _vehicleRepository.UpdateAsync(vehicle);
                     _ = await _vehicleRepository.SaveAsync();

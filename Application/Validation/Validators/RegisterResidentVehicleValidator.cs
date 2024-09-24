@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Application.Validation.Validators
 {
-    public class RegisterOfficialVehicleValidator : AbstractValidator<RegisterOfficialVehicleDto>
+    public class RegisterResidentVehicleValidator : AbstractValidator<RegisterResidentVehicleDto>
     {
-        public RegisterOfficialVehicleValidator() 
+        public RegisterResidentVehicleValidator() 
         {
             RuleFor(x => x.PlateNumber)
                     .NotNull().WithMessage("PlateNumber is required.")

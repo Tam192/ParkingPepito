@@ -74,6 +74,7 @@ IHost host = new HostBuilder()
         _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
         _ = services.AddScoped<IRegisterExitUseCase, RegisterExitUseCase>();
         _ = services.AddScoped<IRegisterOfficialVehicleUseCase, RegisterOfficialVehicleUseCase>();
+        _ = services.AddScoped<IRegisterResidentVehicleUseCase, RegisterResidentVehicleUseCase>();
 
         //Automapper
         _ = services.AddAutoMapper(typeof(VehicleMapping));
@@ -84,11 +85,13 @@ IHost host = new HostBuilder()
         _ = services.AddAutoMapper(typeof(RegisterEntryUseCaseMapping));
         _ = services.AddAutoMapper(typeof(RegisterExitUseCaseMapping));
         _ = services.AddAutoMapper(typeof(RegisterOfficialVehicleUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(RegisterResidentVehicleUseCaseMapping));
 
         //FluentValidator
         _ = services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseValidator>();
         _ = services.AddScoped<IValidator<RegisterExitUseCaseDto>, RegisterExitUseCaseValidator>();
         _ = services.AddScoped<IValidator<RegisterOfficialVehicleDto>, RegisterOfficialVehicleValidator>();
+        _ = services.AddScoped<IValidator<RegisterResidentVehicleDto>, RegisterResidentVehicleValidator>();
     })
     .ConfigureLogging(logging =>
     {
