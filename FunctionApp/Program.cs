@@ -1,4 +1,5 @@
 using Application.Dtos.UseCases;
+using Application.Mappings.Entities;
 using Application.Mappings.UseCases;
 using Application.UseCases;
 using Application.Validation.Validators;
@@ -43,7 +44,7 @@ IHost host = new HostBuilder()
 
         _ = services.AddDbContext<IParkingPepitoDbContext, ParkingPepitoDbContext>(options =>
             {
-                options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings:SQLConnectionString"));
+                _ = options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionStrings:SQLConnectionString"));
             }, ServiceLifetime.Scoped
         );
 
@@ -64,7 +65,7 @@ IHost host = new HostBuilder()
         });
 
         //DbContext
-        services.AddScoped<IParkingPepitoDbContext, ParkingPepitoDbContext>();
+        _ = services.AddScoped<IParkingPepitoDbContext, ParkingPepitoDbContext>();
 
         //Repository
         _ = services.AddScoped(typeof(IEntitiesRepository<>), typeof(EntitiesRepository<>));
@@ -72,14 +73,22 @@ IHost host = new HostBuilder()
         //UseCases
         _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
         _ = services.AddScoped<IRegisterExitUseCase, RegisterExitUseCase>();
+        _ = services.AddScoped<IRegisterOfficialVehicleUseCase, RegisterOfficialVehicleUseCase>();
 
         //Automapper
+        _ = services.AddAutoMapper(typeof(VehicleMapping));
+        _ = services.AddAutoMapper(typeof(StayMapping));
+        _ = services.AddAutoMapper(typeof(CostTypeMapping));
+        _ = services.AddAutoMapper(typeof(EmployeeMapping));
+        _ = services.AddAutoMapper(typeof(VehicleTypeMapping));
         _ = services.AddAutoMapper(typeof(RegisterEntryUseCaseMapping));
         _ = services.AddAutoMapper(typeof(RegisterExitUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(RegisterOfficialVehicleUseCaseMapping));
 
         //FluentValidator
-        services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseDtoValidator>();
-        services.AddScoped<IValidator<RegisterExitUseCaseDto>, RegisterExitUseCaseValidator>();
+        _ = services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseValidator>();
+        _ = services.AddScoped<IValidator<RegisterExitUseCaseDto>, RegisterExitUseCaseValidator>();
+        _ = services.AddScoped<IValidator<RegisterOfficialVehicleDto>, RegisterOfficialVehicleValidator>();
     })
     .ConfigureLogging(logging =>
     {

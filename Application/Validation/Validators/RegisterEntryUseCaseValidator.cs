@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Application.Validation.Validators
 {
-    public class RegisterEntryUseCaseDtoValidator : AbstractValidator<RegisterEntryUseCaseDto>
+    public class RegisterEntryUseCaseValidator : AbstractValidator<RegisterEntryUseCaseDto>
     {
-        public RegisterEntryUseCaseDtoValidator()
+        public RegisterEntryUseCaseValidator()
         {
             RuleFor(x => x.EmployeeId)
                 .NotNull().WithMessage("EmployeeId is required.")

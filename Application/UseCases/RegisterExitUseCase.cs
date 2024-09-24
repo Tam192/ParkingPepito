@@ -3,7 +3,6 @@ using Application.Dtos.UseCases;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repository;
-using Domain.Entities;
 using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases

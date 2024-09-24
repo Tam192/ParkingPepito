@@ -54,6 +54,7 @@ namespace Application.UseCases
             {
                 _logger.LogDebug("Entered plate number is not register. Starting the vehicle registration...");
 
+                //TODO: usar mapeo
                 Vehicle newVehicle = new() { PlateNumber = plateNumber, VehicleTypeId = 3 };
 
                 _ = await _vehicleRepository.CreateAsync(newVehicle);

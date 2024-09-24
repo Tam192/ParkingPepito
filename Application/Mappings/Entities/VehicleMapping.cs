@@ -8,7 +8,7 @@ namespace Application.Mappings.Entities
     {
         public VehicleMapping()
         {
-            _ = CreateMap<Vehicle, VehicleTypeDto>().ReverseMap();
+            _ = CreateMap<Vehicle, VehicleDto>().ReverseMap();
         }
     }
 }
