@@ -6,11 +6,11 @@ namespace Application.Mappings.UseCases
 {
     public class RegisterResidentVehicleUseCaseMapping : Profile
     {
-        public RegisterResidentVehicleUseCaseMapping() 
+        public RegisterResidentVehicleUseCaseMapping()
         {
-            CreateMap<RegisterResidentVehicleDto, Vehicle>()
+            _ = CreateMap<RegisterResidentVehicleDto, Vehicle>()
                 .ForMember(d => d.VehicleTypeId, opt => opt.MapFrom(s => 2))
-                .ReverseMap();   
+                .ReverseMap();
         }
     }
 }

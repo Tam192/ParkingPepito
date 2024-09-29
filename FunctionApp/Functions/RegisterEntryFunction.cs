@@ -20,7 +20,7 @@ namespace FunctionApp.Functions
         private readonly IValidator<RegisterEntryUseCaseDto> _validator = validator ?? throw new ArgumentNullException(nameof(validator));
 
         [Function(nameof(RegisterEntryFunction))]
-        [OpenApiOperation(operationId: "RegisterEntryFunction", tags: ["Register Exit"], Summary = "Register vehicle entry", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "RegisterEntryFunction", tags: ["Register"], Summary = "Register vehicle entry", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(RegisterEntryUseCaseDto), Required = true)]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(BaseResponse<StayDto>), Description = "The OK response message containing a JSON result.")]

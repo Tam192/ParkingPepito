@@ -5,9 +5,9 @@ namespace Application.Validation.Validators
 {
     public class RegisterResidentVehicleValidator : AbstractValidator<RegisterResidentVehicleDto>
     {
-        public RegisterResidentVehicleValidator() 
+        public RegisterResidentVehicleValidator()
         {
-            RuleFor(x => x.PlateNumber)
+            _ = RuleFor(x => x.PlateNumber)
                     .NotNull().WithMessage("PlateNumber is required.")
                     .NotEmpty().WithMessage("PlateNumber is required.");
         }

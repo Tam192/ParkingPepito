@@ -36,7 +36,7 @@ IHost host = new HostBuilder()
                 OpenApiVersion = DefaultOpenApiConfigurationOptions.GetOpenApiVersion(),
                 IncludeRequestingHostName = DefaultOpenApiConfigurationOptions.IsFunctionsRuntimeEnvironmentDevelopment(),
                 ForceHttps = DefaultOpenApiConfigurationOptions.IsHttpsForced(),
-                ForceHttp = DefaultOpenApiConfigurationOptions.IsHttpForced(),
+                ForceHttp = DefaultOpenApiConfigurationOptions.IsHttpForced()
             };
 
             return options;
@@ -69,12 +69,15 @@ IHost host = new HostBuilder()
 
         //Repository
         _ = services.AddScoped(typeof(IEntitiesRepository<>), typeof(EntitiesRepository<>));
+        _ = services.AddScoped(typeof(IViewsRepository<>), typeof(ViewsRepository<>));
 
         //UseCases
         _ = services.AddScoped<IRegisterEntryUseCase, RegisterEntryUseCase>();
         _ = services.AddScoped<IRegisterExitUseCase, RegisterExitUseCase>();
         _ = services.AddScoped<IRegisterOfficialVehicleUseCase, RegisterOfficialVehicleUseCase>();
         _ = services.AddScoped<IRegisterResidentVehicleUseCase, RegisterResidentVehicleUseCase>();
+        _ = services.AddScoped<IStartMonthUseCase, StartMonthUseCase>();
+        _ = services.AddScoped<IGetResidentDebtReportUseCase, GetResidentDebtReportUseCase>();
 
         //Automapper
         _ = services.AddAutoMapper(typeof(VehicleMapping));
@@ -86,12 +89,15 @@ IHost host = new HostBuilder()
         _ = services.AddAutoMapper(typeof(RegisterExitUseCaseMapping));
         _ = services.AddAutoMapper(typeof(RegisterOfficialVehicleUseCaseMapping));
         _ = services.AddAutoMapper(typeof(RegisterResidentVehicleUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(StartMonthUseCaseMapping));
+        _ = services.AddAutoMapper(typeof(ResidentDebtsReportUseCaseMapping));
 
         //FluentValidator
         _ = services.AddScoped<IValidator<RegisterEntryUseCaseDto>, RegisterEntryUseCaseValidator>();
         _ = services.AddScoped<IValidator<RegisterExitUseCaseDto>, RegisterExitUseCaseValidator>();
         _ = services.AddScoped<IValidator<RegisterOfficialVehicleDto>, RegisterOfficialVehicleValidator>();
         _ = services.AddScoped<IValidator<RegisterResidentVehicleDto>, RegisterResidentVehicleValidator>();
+        _ = services.AddScoped<IValidator<StartMonthUseCaseDto>, StartMonthUseCaseValidator>();
     })
     .ConfigureLogging(logging =>
     {

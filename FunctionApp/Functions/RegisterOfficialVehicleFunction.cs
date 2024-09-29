@@ -22,7 +22,7 @@ namespace FunctionApp.Functions
 
 
         [Function(nameof(RegisterOfficialVehicleFunction))]
-        [OpenApiOperation(operationId: "RegisterOfficialVehicleFunction", tags: ["Register Official Vehicle"], Summary = "Register official vehicle", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "RegisterOfficialVehicleFunction", tags: ["Register"], Summary = "Register official vehicle", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(RegisterOfficialVehicleDto), Required = true)]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(BaseResponse<VehicleDto>), Description = "The OK response message containing a JSON result.")]

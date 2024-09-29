@@ -1,6 +1,6 @@
-﻿using Application.Dtos.Entities;
+﻿using Application.Dtos;
+using Application.Dtos.Entities;
 using Application.Dtos.UseCases;
-using Application.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repository;

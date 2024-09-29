@@ -3,6 +3,7 @@ using Application.Dtos.Entities;
 using Application.Dtos.UseCases;
 using Application.UseCases;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -20,7 +21,7 @@ namespace FunctionApp.Functions
         private readonly IValidator<RegisterResidentVehicleDto> _validator = validator ?? throw new ArgumentNullException(nameof(validator));
 
         [Function(nameof(RegisterResidentVehicleFunction))]
-        [OpenApiOperation(operationId: "RegisterResidentVehicleFunction", tags: ["Register Resident Vehicle"], Summary = "Register resident vehicle", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "RegisterResidentVehicleFunction", tags: ["Register"], Summary = "Register resident vehicle", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(RegisterResidentVehicleDto), Required = true)]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(BaseResponse<VehicleDto>), Description = "The OK response message containing a JSON result.")]
@@ -28,7 +29,7 @@ namespace FunctionApp.Functions
         {
             BaseResponse<VehicleDto>? resp;
 
-            var input = await req.ReadFromJsonAsync<RegisterResidentVehicleDto>();
+            RegisterResidentVehicleDto? input = await req.ReadFromJsonAsync<RegisterResidentVehicleDto>();
 
             if (input is null)
             {
@@ -41,7 +42,7 @@ namespace FunctionApp.Functions
                 return new BadRequestObjectResult(resp);
             }
 
-            var validationResult = await _validator.ValidateAsync(input);
+            ValidationResult validationResult = await _validator.ValidateAsync(input);
             if (!validationResult.IsValid)
             {
                 resp = new BaseResponse<VehicleDto>
