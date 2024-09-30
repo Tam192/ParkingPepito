@@ -10,6 +10,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace FunctionApp.Functions
@@ -29,7 +30,8 @@ namespace FunctionApp.Functions
         {
             BaseResponse<VehicleDto>? resp;
 
-            RegisterResidentVehicleDto? input = await req.ReadFromJsonAsync<RegisterResidentVehicleDto>();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var input = JsonConvert.DeserializeObject<RegisterResidentVehicleDto>(requestBody);
 
             if (input is null)
             {

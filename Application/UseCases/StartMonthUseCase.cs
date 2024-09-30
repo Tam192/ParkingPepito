@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
 using Application.Dtos.UseCases;
-using Application.Interfaces.Logger;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repository;

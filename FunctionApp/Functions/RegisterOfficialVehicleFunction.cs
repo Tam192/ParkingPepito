@@ -11,6 +11,7 @@ using System.Net;
 using Application.UseCases;
 using FluentValidation;
 using Microsoft.Azure.Functions.Worker.Http;
+using Newtonsoft.Json;
 
 namespace FunctionApp.Functions
 {
@@ -30,7 +31,8 @@ namespace FunctionApp.Functions
         {
             BaseResponse<VehicleDto>? resp;
 
-            var input = await req.ReadFromJsonAsync<RegisterOfficialVehicleDto>();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var input = JsonConvert.DeserializeObject<RegisterOfficialVehicleDto>(requestBody);
 
             if (input is null)
             {

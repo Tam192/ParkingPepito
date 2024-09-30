@@ -9,6 +9,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace FunctionApp.Functions
@@ -28,7 +29,8 @@ namespace FunctionApp.Functions
         {
             BaseResponse<StayDto>? resp;
 
-            var input = await req.ReadFromJsonAsync<RegisterEntryUseCaseDto>();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var input = JsonConvert.DeserializeObject<RegisterEntryUseCaseDto>(requestBody);
 
             if (input is null)
             {
