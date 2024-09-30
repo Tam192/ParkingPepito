@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Function App parking-pepito with
 on:
   push:
     branches:
-    - feature/dar_alta_vehiculo_oficial
+    - feature/master
 env:
   AZURE_FUNCTIONAPP_NAME: parking-pepito
   AZURE_FUNCTIONAPP_PACKAGE_PATH: FunctionApp\.
